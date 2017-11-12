@@ -1,0 +1,10 @@
+note_on channel=0 note=80 velocity=43 time=480
+note_on channel=0 note=77 velocity=36 time=0
+note_on channel=0 note=77 velocity=0 time=960
+note_on channel=0 note=80 velocity=0 time=0
+note_on channel=0 note=77 velocity=39 time=0
+note_on channel=0 note=73 velocity=33 time=0
+note_on channel=0 note=73 velocity=0 time=960
+note_on channel=0 note=77 velocity=0 time=0
+note_on channel=0 note=72 velocity=31 time=0
+note_on channel=0 note=75 velocity=37 time=0
