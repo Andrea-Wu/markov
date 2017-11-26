@@ -5,6 +5,7 @@ def parseChords():
 	adjacencyMatrix = {}
 	
 	#creates empty adjacency matrix
+	#fills matrix with zeroes
 	for i in range(27,98):
 		adjacencyMatrix.update({i:{}})
 		for j in range(27, 98):
@@ -63,16 +64,28 @@ def printMatrix(am): #am = adjacencyMatrix
 		for j in range(27, 98):
 			print am[i][j],
 
-		print
+	
+def makeProbMatrix(am): #am is adjacency matrix
+	
+	for i in range(27,98):
 
-	
-	
+		#this gets sum of all counts in a row
+		sum_ = 0
+		myDict = am[i]
+		for j in range(27,98):
+			sum_ = sum_ + myDict[j]
+
+		#this turns all sums into a probability
+		for j in range(27,98):
+			myDict[j] = myDict[j] / sum_
+
+
+	return am
+		
 
 
 def parseMelody():
 			
-	
-
 	fileIn = open("clairHigh.txt", "r")
 	prev = fileIn.readline()
 	starti = prev.index("note=")+5
@@ -105,4 +118,8 @@ if __name__ == "__main__":
 	am = parseMelody()
 	printMatrix(am)
 
-
+def doAMarkovChain(am):
+	vec initState = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	
+		
+	
