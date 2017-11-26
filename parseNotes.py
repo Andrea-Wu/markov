@@ -1,3 +1,8 @@
+from random import *
+
+#i'm so sorry
+writeMe = open("writeMe.txt", "w")
+
 def parseChords():
 	fileIn = open('clairNotes.txt', 'r')
 	line = fileIn.readline()
@@ -64,6 +69,8 @@ def printMatrix(am): #am = adjacencyMatrix
 		for j in range(27, 98):
 			print am[i][j],
 
+		print str(i)
+
 	
 def makeProbMatrix(am): #am is adjacency matrix
 	
@@ -74,15 +81,30 @@ def makeProbMatrix(am): #am is adjacency matrix
 		myDict = am[i]
 		for j in range(27,98):
 			sum_ = sum_ + myDict[j]
+		
+		if sum_ == 0:
+			continue
 
 		#this turns all sums into a probability
 		for j in range(27,98):
-			myDict[j] = myDict[j] / sum_
+			myDict[j] = myDict[j] / float(sum_)
 
 
 	return am
 		
 
+def makeProbSumMatrix(am): 
+	for i in range(27,98):
+		sum_ = 0
+		myDict = am[i]
+		for j in range(27,98):
+			if myDict[j] != 0:
+				sum_ = sum_ + myDict[j]
+				myDict[j] = sum_
+
+		
+	return am 
+	
 
 def parseMelody():
 			
@@ -113,13 +135,60 @@ def parseMelody():
 
 	return adjacencyMatrix
 
+def guessNext(pm): #pm is probability matrix
+
+	#how do u write to a file?
+
+	writeMe = open("writeMe.txt", "a") # opens file in append mode
+
+	#this starts the music on the tonic note, how basic
+	#declares variable for current note
+	prev = 80
+	curr = -1
+	writeMe.write(str(80))
+ 
+	for i in range (1, 100):
+		writeMe.write("\n")
+		#find the next note using random processes!
+		rand = random()
+		myDict = pm[prev]
+		prevProb = 0
+
+		#will get current and next probabilities
+		#if rand is less than current, greater than prev, then it is the correct note. write the current note.
+		#i wouldn't have to do this if i had sorted the frequencies :(
+		for j in range(27,97): #goes thru nonzero probabilities
+			currProb = myDict[j+1] 
+				
+			if currProb != 0:
+				if rand > prevProb and rand <=  currProb:
+					curr = j
+					writeMe.write(str(curr))
+					print str(curr)
+					prev = curr
+					break	
+
+				prevProb = currProb 	
+				
+	writeMe.write("\n")
+
+def guessNextDriver(pm): #this is needed because the guessNext function ends when it reaches a note with zero probability 
+			#of reaching another note. I am not sure why that happens, you'd think if a note can be reached, then 
+			#it can also reach at least 1 other note, with the exception of the last note. 
+	
+	for i in range(0,10):
+		guessNext(pm)
+		print "hello!"
+		
 
 if __name__ == "__main__":
 	am = parseMelody()
+	am = makeProbMatrix(am)
+	am = makeProbSumMatrix(am)
 	printMatrix(am)
+	guessNextDriver(am)
 
-def doAMarkovChain(am):
-	vec initState = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
 	
 		
 	
