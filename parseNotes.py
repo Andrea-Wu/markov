@@ -1,7 +1,7 @@
 from random import *
 
 #i'm so sorry
-writeMe = open("writeMe.txt", "w")
+
 
 def parseChords():
 	fileIn = open('clairNotes.txt', 'r')
@@ -171,21 +171,27 @@ def guessNext(pm): #pm is probability matrix
 				prevProb = currProb 	
 				
 	writeMe.write("\n")
+	
+	writeMe.close()
+	
 
 def guessNextDriver(pm): #this is needed because the guessNext function ends when it reaches a note with zero probability 
 			#of reaching another note. I am not sure why that happens, you'd think if a note can be reached, then 
 			#it can also reach at least 1 other note, with the exception of the last note. 
 	
 	for i in range(0,10):
+		print "80"
 		guessNext(pm)
-		print "hello!"
+		print ""
+
+#	writeMe.close()
 		
 
 if __name__ == "__main__":
 	am = parseMelody()
 	am = makeProbMatrix(am)
 	am = makeProbSumMatrix(am)
-	printMatrix(am)
+#	printMatrix(am)
 	guessNextDriver(am)
 
 
