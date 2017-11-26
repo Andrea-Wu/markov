@@ -3,7 +3,7 @@
 The end goal is to host a website that plays procedurally generated music.
 
 Short term goals:
-Clean out this repository...It's a mess
+Clean out this repository...It's a mess \n
 There's an API called "Mingus" that solves a lot of problems
 Right now my probability matrix only accounts for the note right after.
   What if I made probability matrices for 2 notes after current, 3 notes after current, etc
